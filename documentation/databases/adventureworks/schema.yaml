@@ -1,0 +1,1592 @@
+humanresources:
+  department:
+    comment: Lookup table containing the departments within the Adventure Works Cycles
+      company.
+    number_of_columns: 4
+    columns:
+    - name: departmentid
+      type: integer
+    - name: name
+      type: character varying
+    - name: groupname
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - departmentid
+    list_of_foreign_keys: []
+    number_of_rows: 16
+  employee:
+    comment: Employee information such as salary, department, and title.
+    number_of_columns: 15
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: nationalidnumber
+      type: character varying
+    - name: loginid
+      type: character varying
+    - name: jobtitle
+      type: character varying
+    - name: birthdate
+      type: date
+    - name: maritalstatus
+      type: character
+    - name: gender
+      type: character
+    - name: hiredate
+      type: date
+    - name: salariedflag
+      type: boolean
+    - name: vacationhours
+      type: smallint
+    - name: sickleavehours
+      type: smallint
+    - name: currentflag
+      type: boolean
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    - name: organizationnode
+      type: character varying
+    list_of_primary_keys:
+    - businessentityid
+    list_of_foreign_keys:
+    - businessentityid
+    number_of_rows: 290
+  employeedepartmenthistory:
+    comment: Employee department transfers.
+    number_of_columns: 6
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: departmentid
+      type: smallint
+    - name: shiftid
+      type: smallint
+    - name: startdate
+      type: date
+    - name: enddate
+      type: date
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    - departmentid
+    - shiftid
+    - startdate
+    list_of_foreign_keys:
+    - businessentityid
+    - departmentid
+    - shiftid
+    number_of_rows: 296
+  employeepayhistory:
+    comment: Employee pay history.
+    number_of_columns: 5
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: ratechangedate
+      type: timestamp without time zone
+    - name: rate
+      type: numeric
+    - name: payfrequency
+      type: smallint
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    - ratechangedate
+    list_of_foreign_keys:
+    - businessentityid
+    number_of_rows: 316
+  jobcandidate:
+    comment: RÃ©sumÃ©s submitted to Human Resources by job applicants.
+    number_of_columns: 4
+    columns:
+    - name: jobcandidateid
+      type: integer
+    - name: businessentityid
+      type: integer
+    - name: resume
+      type: xml
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - jobcandidateid
+    list_of_foreign_keys:
+    - businessentityid
+    number_of_rows: 13
+  shift:
+    comment: Work shift lookup table.
+    number_of_columns: 5
+    columns:
+    - name: shiftid
+      type: integer
+    - name: name
+      type: character varying
+    - name: starttime
+      type: time without time zone
+    - name: endtime
+      type: time without time zone
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - shiftid
+    list_of_foreign_keys: []
+    number_of_rows: 3
+person:
+  address:
+    comment: Street address information for customers, employees, and vendors.
+    number_of_columns: 9
+    columns:
+    - name: addressid
+      type: integer
+    - name: addressline1
+      type: character varying
+    - name: addressline2
+      type: character varying
+    - name: city
+      type: character varying
+    - name: stateprovinceid
+      type: integer
+    - name: postalcode
+      type: character varying
+    - name: spatiallocation
+      type: bytea
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - addressid
+    list_of_foreign_keys:
+    - stateprovinceid
+    number_of_rows: 19614
+  addresstype:
+    comment: Types of addresses stored in the Address table.
+    number_of_columns: 4
+    columns:
+    - name: addresstypeid
+      type: integer
+    - name: name
+      type: character varying
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - addresstypeid
+    list_of_foreign_keys: []
+    number_of_rows: 6
+  businessentity:
+    comment: Source of the ID that connects vendors, customers, and employees with
+      address and contact information.
+    number_of_columns: 3
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    list_of_foreign_keys: []
+    number_of_rows: 20777
+  businessentityaddress:
+    comment: Cross-reference table mapping customers, vendors, and employees to their
+      addresses.
+    number_of_columns: 5
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: addressid
+      type: integer
+    - name: addresstypeid
+      type: integer
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    - addressid
+    - addresstypeid
+    list_of_foreign_keys:
+    - businessentityid
+    - addressid
+    - addresstypeid
+    number_of_rows: 19614
+  businessentitycontact:
+    comment: Cross-reference table mapping stores, vendors, and employees to people
+    number_of_columns: 5
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: personid
+      type: integer
+    - name: contacttypeid
+      type: integer
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    - personid
+    - contacttypeid
+    list_of_foreign_keys:
+    - businessentityid
+    - personid
+    - contacttypeid
+    number_of_rows: 909
+  contacttype:
+    comment: Lookup table containing the types of business entity contacts.
+    number_of_columns: 3
+    columns:
+    - name: contacttypeid
+      type: integer
+    - name: name
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - contacttypeid
+    list_of_foreign_keys: []
+    number_of_rows: 20
+  countryregion:
+    comment: Lookup table containing the ISO standard codes for countries and regions.
+    number_of_columns: 3
+    columns:
+    - name: countryregioncode
+      type: character varying
+    - name: name
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - countryregioncode
+    list_of_foreign_keys: []
+    number_of_rows: 238
+  emailaddress:
+    comment: Where to send a person email.
+    number_of_columns: 5
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: emailaddressid
+      type: integer
+    - name: emailaddress
+      type: character varying
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    - emailaddressid
+    list_of_foreign_keys:
+    - businessentityid
+    number_of_rows: 19972
+  password:
+    comment: One way hashed authentication information
+    number_of_columns: 5
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: passwordhash
+      type: character varying
+    - name: passwordsalt
+      type: character varying
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    list_of_foreign_keys:
+    - businessentityid
+    number_of_rows: 19972
+  person:
+    comment: 'Human beings involved with AdventureWorks: employees, customer contacts,
+      and vendor contacts.'
+    number_of_columns: 13
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: persontype
+      type: character
+    - name: namestyle
+      type: boolean
+    - name: title
+      type: character varying
+    - name: firstname
+      type: character varying
+    - name: middlename
+      type: character varying
+    - name: lastname
+      type: character varying
+    - name: suffix
+      type: character varying
+    - name: emailpromotion
+      type: integer
+    - name: additionalcontactinfo
+      type: xml
+    - name: demographics
+      type: xml
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    list_of_foreign_keys:
+    - businessentityid
+    number_of_rows: 19972
+  personphone:
+    comment: Telephone number and type of a person.
+    number_of_columns: 4
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: phonenumber
+      type: character varying
+    - name: phonenumbertypeid
+      type: integer
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    - phonenumber
+    - phonenumbertypeid
+    list_of_foreign_keys:
+    - businessentityid
+    - phonenumbertypeid
+    number_of_rows: 19972
+  phonenumbertype:
+    comment: Type of phone number of a person.
+    number_of_columns: 3
+    columns:
+    - name: phonenumbertypeid
+      type: integer
+    - name: name
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - phonenumbertypeid
+    list_of_foreign_keys: []
+    number_of_rows: 3
+  stateprovince:
+    comment: State and province lookup table.
+    number_of_columns: 8
+    columns:
+    - name: stateprovinceid
+      type: integer
+    - name: stateprovincecode
+      type: character
+    - name: countryregioncode
+      type: character varying
+    - name: isonlystateprovinceflag
+      type: boolean
+    - name: name
+      type: character varying
+    - name: territoryid
+      type: integer
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - stateprovinceid
+    list_of_foreign_keys:
+    - countryregioncode
+    - territoryid
+    number_of_rows: 181
+production:
+  billofmaterials:
+    comment: Items required to make bicycles and bicycle subassemblies. It identifies
+      the heirarchical relationship between a parent product and its components.
+    number_of_columns: 9
+    columns:
+    - name: billofmaterialsid
+      type: integer
+    - name: productassemblyid
+      type: integer
+    - name: componentid
+      type: integer
+    - name: startdate
+      type: timestamp without time zone
+    - name: enddate
+      type: timestamp without time zone
+    - name: unitmeasurecode
+      type: character
+    - name: bomlevel
+      type: smallint
+    - name: perassemblyqty
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - billofmaterialsid
+    list_of_foreign_keys:
+    - productassemblyid
+    - componentid
+    - unitmeasurecode
+    number_of_rows: 2679
+  culture:
+    comment: Lookup table containing the languages in which some AdventureWorks data
+      is stored.
+    number_of_columns: 3
+    columns:
+    - name: cultureid
+      type: character
+    - name: name
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - cultureid
+    list_of_foreign_keys: []
+    number_of_rows: 8
+  document:
+    comment: Product maintenance documents.
+    number_of_columns: 13
+    columns:
+    - name: title
+      type: character varying
+    - name: owner
+      type: integer
+    - name: folderflag
+      type: boolean
+    - name: filename
+      type: character varying
+    - name: fileextension
+      type: character varying
+    - name: revision
+      type: character
+    - name: changenumber
+      type: integer
+    - name: status
+      type: smallint
+    - name: documentsummary
+      type: text
+    - name: document
+      type: bytea
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    - name: documentnode
+      type: character varying
+    list_of_primary_keys:
+    - documentnode
+    list_of_foreign_keys:
+    - owner
+    number_of_rows: 13
+  illustration:
+    comment: Bicycle assembly diagrams.
+    number_of_columns: 3
+    columns:
+    - name: illustrationid
+      type: integer
+    - name: diagram
+      type: xml
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - illustrationid
+    list_of_foreign_keys: []
+    number_of_rows: 5
+  location:
+    comment: Product inventory and manufacturing locations.
+    number_of_columns: 5
+    columns:
+    - name: locationid
+      type: integer
+    - name: name
+      type: character varying
+    - name: costrate
+      type: numeric
+    - name: availability
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - locationid
+    list_of_foreign_keys: []
+    number_of_rows: 14
+  product:
+    comment: Products sold or used in the manfacturing of sold products.
+    number_of_columns: 25
+    columns:
+    - name: productid
+      type: integer
+    - name: name
+      type: character varying
+    - name: productnumber
+      type: character varying
+    - name: makeflag
+      type: boolean
+    - name: finishedgoodsflag
+      type: boolean
+    - name: color
+      type: character varying
+    - name: safetystocklevel
+      type: smallint
+    - name: reorderpoint
+      type: smallint
+    - name: standardcost
+      type: numeric
+    - name: listprice
+      type: numeric
+    - name: size
+      type: character varying
+    - name: sizeunitmeasurecode
+      type: character
+    - name: weightunitmeasurecode
+      type: character
+    - name: weight
+      type: numeric
+    - name: daystomanufacture
+      type: integer
+    - name: productline
+      type: character
+    - name: class
+      type: character
+    - name: style
+      type: character
+    - name: productsubcategoryid
+      type: integer
+    - name: productmodelid
+      type: integer
+    - name: sellstartdate
+      type: timestamp without time zone
+    - name: sellenddate
+      type: timestamp without time zone
+    - name: discontinueddate
+      type: timestamp without time zone
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productid
+    list_of_foreign_keys:
+    - sizeunitmeasurecode
+    - weightunitmeasurecode
+    - productsubcategoryid
+    - productmodelid
+    number_of_rows: 504
+  productcategory:
+    comment: High-level product categorization.
+    number_of_columns: 4
+    columns:
+    - name: productcategoryid
+      type: integer
+    - name: name
+      type: character varying
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productcategoryid
+    list_of_foreign_keys: []
+    number_of_rows: 4
+  productcosthistory:
+    comment: Changes in the cost of a product over time.
+    number_of_columns: 5
+    columns:
+    - name: productid
+      type: integer
+    - name: startdate
+      type: timestamp without time zone
+    - name: enddate
+      type: timestamp without time zone
+    - name: standardcost
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productid
+    - startdate
+    list_of_foreign_keys:
+    - productid
+    number_of_rows: 395
+  productdescription:
+    comment: Product descriptions in several languages.
+    number_of_columns: 4
+    columns:
+    - name: productdescriptionid
+      type: integer
+    - name: description
+      type: character varying
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productdescriptionid
+    list_of_foreign_keys: []
+    number_of_rows: 762
+  productdocument:
+    comment: Cross-reference table mapping products to related product documents.
+    number_of_columns: 3
+    columns:
+    - name: productid
+      type: integer
+    - name: modifieddate
+      type: timestamp without time zone
+    - name: documentnode
+      type: character varying
+    list_of_primary_keys:
+    - productid
+    - documentnode
+    list_of_foreign_keys:
+    - productid
+    - documentnode
+    number_of_rows: 32
+  productinventory:
+    comment: Product inventory information.
+    number_of_columns: 7
+    columns:
+    - name: productid
+      type: integer
+    - name: locationid
+      type: smallint
+    - name: shelf
+      type: character varying
+    - name: bin
+      type: smallint
+    - name: quantity
+      type: smallint
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productid
+    - locationid
+    list_of_foreign_keys:
+    - productid
+    - locationid
+    number_of_rows: 1069
+  productlistpricehistory:
+    comment: Changes in the list price of a product over time.
+    number_of_columns: 5
+    columns:
+    - name: productid
+      type: integer
+    - name: startdate
+      type: timestamp without time zone
+    - name: enddate
+      type: timestamp without time zone
+    - name: listprice
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productid
+    - startdate
+    list_of_foreign_keys:
+    - productid
+    number_of_rows: 395
+  productmodel:
+    comment: Product model classification.
+    number_of_columns: 6
+    columns:
+    - name: productmodelid
+      type: integer
+    - name: name
+      type: character varying
+    - name: catalogdescription
+      type: xml
+    - name: instructions
+      type: xml
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productmodelid
+    list_of_foreign_keys: []
+    number_of_rows: 128
+  productmodelillustration:
+    comment: Cross-reference table mapping product models and illustrations.
+    number_of_columns: 3
+    columns:
+    - name: productmodelid
+      type: integer
+    - name: illustrationid
+      type: integer
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productmodelid
+    - illustrationid
+    list_of_foreign_keys:
+    - productmodelid
+    - illustrationid
+    number_of_rows: 7
+  productmodelproductdescriptionculture:
+    comment: Cross-reference table mapping product descriptions and the language the
+      description is written in.
+    number_of_columns: 4
+    columns:
+    - name: productmodelid
+      type: integer
+    - name: productdescriptionid
+      type: integer
+    - name: cultureid
+      type: character
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productmodelid
+    - productdescriptionid
+    - cultureid
+    list_of_foreign_keys:
+    - productmodelid
+    - productdescriptionid
+    - cultureid
+    number_of_rows: 762
+  productphoto:
+    comment: Product images.
+    number_of_columns: 6
+    columns:
+    - name: productphotoid
+      type: integer
+    - name: thumbnailphoto
+      type: bytea
+    - name: thumbnailphotofilename
+      type: character varying
+    - name: largephoto
+      type: bytea
+    - name: largephotofilename
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productphotoid
+    list_of_foreign_keys: []
+    number_of_rows: 101
+  productproductphoto:
+    comment: Cross-reference table mapping products and product photos.
+    number_of_columns: 4
+    columns:
+    - name: productid
+      type: integer
+    - name: productphotoid
+      type: integer
+    - name: primary
+      type: boolean
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productid
+    - productphotoid
+    list_of_foreign_keys:
+    - productid
+    - productphotoid
+    number_of_rows: 504
+  productreview:
+    comment: Customer reviews of products they have purchased.
+    number_of_columns: 8
+    columns:
+    - name: productreviewid
+      type: integer
+    - name: productid
+      type: integer
+    - name: reviewername
+      type: character varying
+    - name: reviewdate
+      type: timestamp without time zone
+    - name: emailaddress
+      type: character varying
+    - name: rating
+      type: integer
+    - name: comments
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productreviewid
+    list_of_foreign_keys:
+    - productid
+    number_of_rows: 4
+  productsubcategory:
+    comment: Product subcategories. See ProductCategory table.
+    number_of_columns: 5
+    columns:
+    - name: productsubcategoryid
+      type: integer
+    - name: productcategoryid
+      type: integer
+    - name: name
+      type: character varying
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productsubcategoryid
+    list_of_foreign_keys:
+    - productcategoryid
+    number_of_rows: 37
+  scrapreason:
+    comment: Manufacturing failure reasons lookup table.
+    number_of_columns: 3
+    columns:
+    - name: scrapreasonid
+      type: integer
+    - name: name
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - scrapreasonid
+    list_of_foreign_keys: []
+    number_of_rows: 16
+  transactionhistory:
+    comment: Record of each purchase order, sales order, or work order transaction
+      year to date.
+    number_of_columns: 9
+    columns:
+    - name: transactionid
+      type: integer
+    - name: productid
+      type: integer
+    - name: referenceorderid
+      type: integer
+    - name: referenceorderlineid
+      type: integer
+    - name: transactiondate
+      type: timestamp without time zone
+    - name: transactiontype
+      type: character
+    - name: quantity
+      type: integer
+    - name: actualcost
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - transactionid
+    list_of_foreign_keys:
+    - productid
+    number_of_rows: 113443
+  transactionhistoryarchive:
+    comment: Transactions for previous years.
+    number_of_columns: 9
+    columns:
+    - name: transactionid
+      type: integer
+    - name: productid
+      type: integer
+    - name: referenceorderid
+      type: integer
+    - name: referenceorderlineid
+      type: integer
+    - name: transactiondate
+      type: timestamp without time zone
+    - name: transactiontype
+      type: character
+    - name: quantity
+      type: integer
+    - name: actualcost
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - transactionid
+    list_of_foreign_keys: []
+    number_of_rows: 89253
+  unitmeasure:
+    comment: Unit of measure lookup table.
+    number_of_columns: 3
+    columns:
+    - name: unitmeasurecode
+      type: character
+    - name: name
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - unitmeasurecode
+    list_of_foreign_keys: []
+    number_of_rows: 38
+  workorder:
+    comment: Manufacturing work orders.
+    number_of_columns: 9
+    columns:
+    - name: workorderid
+      type: integer
+    - name: productid
+      type: integer
+    - name: orderqty
+      type: integer
+    - name: scrappedqty
+      type: smallint
+    - name: startdate
+      type: timestamp without time zone
+    - name: enddate
+      type: timestamp without time zone
+    - name: duedate
+      type: timestamp without time zone
+    - name: scrapreasonid
+      type: smallint
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - workorderid
+    list_of_foreign_keys:
+    - productid
+    - scrapreasonid
+    number_of_rows: 72591
+  workorderrouting:
+    comment: Work order details.
+    number_of_columns: 12
+    columns:
+    - name: workorderid
+      type: integer
+    - name: productid
+      type: integer
+    - name: operationsequence
+      type: smallint
+    - name: locationid
+      type: smallint
+    - name: scheduledstartdate
+      type: timestamp without time zone
+    - name: scheduledenddate
+      type: timestamp without time zone
+    - name: actualstartdate
+      type: timestamp without time zone
+    - name: actualenddate
+      type: timestamp without time zone
+    - name: actualresourcehrs
+      type: numeric
+    - name: plannedcost
+      type: numeric
+    - name: actualcost
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - workorderid
+    - productid
+    - operationsequence
+    list_of_foreign_keys:
+    - workorderid
+    - locationid
+    number_of_rows: 67131
+purchasing:
+  productvendor:
+    comment: Cross-reference table mapping vendors with the products they supply.
+    number_of_columns: 11
+    columns:
+    - name: productid
+      type: integer
+    - name: businessentityid
+      type: integer
+    - name: averageleadtime
+      type: integer
+    - name: standardprice
+      type: numeric
+    - name: lastreceiptcost
+      type: numeric
+    - name: lastreceiptdate
+      type: timestamp without time zone
+    - name: minorderqty
+      type: integer
+    - name: maxorderqty
+      type: integer
+    - name: onorderqty
+      type: integer
+    - name: unitmeasurecode
+      type: character
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - productid
+    - businessentityid
+    list_of_foreign_keys:
+    - productid
+    - businessentityid
+    - unitmeasurecode
+    number_of_rows: 460
+  purchaseorderdetail:
+    comment: Individual products associated with a specific purchase order. See PurchaseOrderHeader.
+    number_of_columns: 9
+    columns:
+    - name: purchaseorderid
+      type: integer
+    - name: purchaseorderdetailid
+      type: integer
+    - name: duedate
+      type: timestamp without time zone
+    - name: orderqty
+      type: smallint
+    - name: productid
+      type: integer
+    - name: unitprice
+      type: numeric
+    - name: receivedqty
+      type: numeric
+    - name: rejectedqty
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - purchaseorderid
+    - purchaseorderdetailid
+    list_of_foreign_keys:
+    - purchaseorderid
+    - productid
+    number_of_rows: 8845
+  purchaseorderheader:
+    comment: General purchase order information. See PurchaseOrderDetail.
+    number_of_columns: 12
+    columns:
+    - name: purchaseorderid
+      type: integer
+    - name: revisionnumber
+      type: smallint
+    - name: status
+      type: smallint
+    - name: employeeid
+      type: integer
+    - name: vendorid
+      type: integer
+    - name: shipmethodid
+      type: integer
+    - name: orderdate
+      type: timestamp without time zone
+    - name: shipdate
+      type: timestamp without time zone
+    - name: subtotal
+      type: numeric
+    - name: taxamt
+      type: numeric
+    - name: freight
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - purchaseorderid
+    list_of_foreign_keys:
+    - employeeid
+    - vendorid
+    - shipmethodid
+    number_of_rows: 4012
+  shipmethod:
+    comment: Shipping company lookup table.
+    number_of_columns: 6
+    columns:
+    - name: shipmethodid
+      type: integer
+    - name: name
+      type: character varying
+    - name: shipbase
+      type: numeric
+    - name: shiprate
+      type: numeric
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - shipmethodid
+    list_of_foreign_keys: []
+    number_of_rows: 5
+  vendor:
+    comment: Companies from whom Adventure Works Cycles purchases parts or other goods.
+    number_of_columns: 8
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: accountnumber
+      type: character varying
+    - name: name
+      type: character varying
+    - name: creditrating
+      type: smallint
+    - name: preferredvendorstatus
+      type: boolean
+    - name: activeflag
+      type: boolean
+    - name: purchasingwebserviceurl
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    list_of_foreign_keys:
+    - businessentityid
+    number_of_rows: 104
+sales:
+  countryregioncurrency:
+    comment: Cross-reference table mapping ISO currency codes to a country or region.
+    number_of_columns: 3
+    columns:
+    - name: countryregioncode
+      type: character varying
+    - name: currencycode
+      type: character
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - countryregioncode
+    - currencycode
+    list_of_foreign_keys:
+    - countryregioncode
+    - currencycode
+    number_of_rows: 109
+  creditcard:
+    comment: Customer credit card information.
+    number_of_columns: 6
+    columns:
+    - name: creditcardid
+      type: integer
+    - name: cardtype
+      type: character varying
+    - name: cardnumber
+      type: character varying
+    - name: expmonth
+      type: smallint
+    - name: expyear
+      type: smallint
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - creditcardid
+    list_of_foreign_keys: []
+    number_of_rows: 19118
+  currency:
+    comment: Lookup table containing standard ISO currencies.
+    number_of_columns: 3
+    columns:
+    - name: currencycode
+      type: character
+    - name: name
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - currencycode
+    list_of_foreign_keys: []
+    number_of_rows: 105
+  currencyrate:
+    comment: Currency exchange rates.
+    number_of_columns: 7
+    columns:
+    - name: currencyrateid
+      type: integer
+    - name: currencyratedate
+      type: timestamp without time zone
+    - name: fromcurrencycode
+      type: character
+    - name: tocurrencycode
+      type: character
+    - name: averagerate
+      type: numeric
+    - name: endofdayrate
+      type: numeric
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - currencyrateid
+    list_of_foreign_keys:
+    - fromcurrencycode
+    - tocurrencycode
+    number_of_rows: 13532
+  customer:
+    comment: Current customer information. Also see the Person and Store tables.
+    number_of_columns: 6
+    columns:
+    - name: customerid
+      type: integer
+    - name: personid
+      type: integer
+    - name: storeid
+      type: integer
+    - name: territoryid
+      type: integer
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - customerid
+    list_of_foreign_keys:
+    - personid
+    - storeid
+    - territoryid
+    number_of_rows: 19820
+  personcreditcard:
+    comment: Cross-reference table mapping people to their credit card information
+      in the CreditCard table.
+    number_of_columns: 3
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: creditcardid
+      type: integer
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    - creditcardid
+    list_of_foreign_keys:
+    - businessentityid
+    - creditcardid
+    number_of_rows: 19118
+  salesorderdetail:
+    comment: Individual products associated with a specific sales order. See SalesOrderHeader.
+    number_of_columns: 10
+    columns:
+    - name: salesorderid
+      type: integer
+    - name: salesorderdetailid
+      type: integer
+    - name: carriertrackingnumber
+      type: character varying
+    - name: orderqty
+      type: smallint
+    - name: productid
+      type: integer
+    - name: specialofferid
+      type: integer
+    - name: unitprice
+      type: numeric
+    - name: unitpricediscount
+      type: numeric
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - salesorderid
+    - salesorderdetailid
+    list_of_foreign_keys:
+    - salesorderid
+    - productid
+    - specialofferid
+    number_of_rows: 121317
+  salesorderheader:
+    comment: General sales order information.
+    number_of_columns: 25
+    columns:
+    - name: salesorderid
+      type: integer
+    - name: revisionnumber
+      type: smallint
+    - name: orderdate
+      type: timestamp without time zone
+    - name: duedate
+      type: timestamp without time zone
+    - name: shipdate
+      type: timestamp without time zone
+    - name: status
+      type: smallint
+    - name: onlineorderflag
+      type: boolean
+    - name: purchaseordernumber
+      type: character varying
+    - name: accountnumber
+      type: character varying
+    - name: customerid
+      type: integer
+    - name: salespersonid
+      type: integer
+    - name: territoryid
+      type: integer
+    - name: billtoaddressid
+      type: integer
+    - name: shiptoaddressid
+      type: integer
+    - name: shipmethodid
+      type: integer
+    - name: creditcardid
+      type: integer
+    - name: creditcardapprovalcode
+      type: character varying
+    - name: currencyrateid
+      type: integer
+    - name: subtotal
+      type: numeric
+    - name: taxamt
+      type: numeric
+    - name: freight
+      type: numeric
+    - name: totaldue
+      type: numeric
+    - name: comment
+      type: character varying
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - salesorderid
+    list_of_foreign_keys:
+    - customerid
+    - salespersonid
+    - territoryid
+    - billtoaddressid
+    - shiptoaddressid
+    - shipmethodid
+    - creditcardid
+    - currencyrateid
+    number_of_rows: 31465
+  salesorderheadersalesreason:
+    comment: Cross-reference table mapping sales orders to sales reason codes.
+    number_of_columns: 3
+    columns:
+    - name: salesorderid
+      type: integer
+    - name: salesreasonid
+      type: integer
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - salesorderid
+    - salesreasonid
+    list_of_foreign_keys:
+    - salesorderid
+    - salesreasonid
+    number_of_rows: 27647
+  salesperson:
+    comment: Sales representative current information.
+    number_of_columns: 9
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: territoryid
+      type: integer
+    - name: salesquota
+      type: numeric
+    - name: bonus
+      type: numeric
+    - name: commissionpct
+      type: numeric
+    - name: salesytd
+      type: numeric
+    - name: saleslastyear
+      type: numeric
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    list_of_foreign_keys:
+    - businessentityid
+    - territoryid
+    number_of_rows: 17
+  salespersonquotahistory:
+    comment: Sales performance tracking.
+    number_of_columns: 5
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: quotadate
+      type: timestamp without time zone
+    - name: salesquota
+      type: numeric
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    - quotadate
+    list_of_foreign_keys:
+    - businessentityid
+    number_of_rows: 163
+  salesreason:
+    comment: Lookup table of customer purchase reasons.
+    number_of_columns: 4
+    columns:
+    - name: salesreasonid
+      type: integer
+    - name: name
+      type: character varying
+    - name: reasontype
+      type: character varying
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - salesreasonid
+    list_of_foreign_keys: []
+    number_of_rows: 10
+  salestaxrate:
+    comment: Tax rate lookup table.
+    number_of_columns: 7
+    columns:
+    - name: salestaxrateid
+      type: integer
+    - name: stateprovinceid
+      type: integer
+    - name: taxtype
+      type: smallint
+    - name: taxrate
+      type: numeric
+    - name: name
+      type: character varying
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - salestaxrateid
+    list_of_foreign_keys:
+    - stateprovinceid
+    number_of_rows: 29
+  salesterritory:
+    comment: Sales territory lookup table.
+    number_of_columns: 10
+    columns:
+    - name: territoryid
+      type: integer
+    - name: name
+      type: character varying
+    - name: countryregioncode
+      type: character varying
+    - name: group
+      type: character varying
+    - name: salesytd
+      type: numeric
+    - name: saleslastyear
+      type: numeric
+    - name: costytd
+      type: numeric
+    - name: costlastyear
+      type: numeric
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - territoryid
+    list_of_foreign_keys:
+    - countryregioncode
+    number_of_rows: 10
+  salesterritoryhistory:
+    comment: Sales representative transfers to other sales territories.
+    number_of_columns: 6
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: territoryid
+      type: integer
+    - name: startdate
+      type: timestamp without time zone
+    - name: enddate
+      type: timestamp without time zone
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    - territoryid
+    - startdate
+    list_of_foreign_keys:
+    - businessentityid
+    - territoryid
+    number_of_rows: 17
+  shoppingcartitem:
+    comment: Contains online customer orders until the order is submitted or cancelled.
+    number_of_columns: 6
+    columns:
+    - name: shoppingcartitemid
+      type: integer
+    - name: shoppingcartid
+      type: character varying
+    - name: quantity
+      type: integer
+    - name: productid
+      type: integer
+    - name: datecreated
+      type: timestamp without time zone
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - shoppingcartitemid
+    list_of_foreign_keys:
+    - productid
+    number_of_rows: 3
+  specialoffer:
+    comment: Sale discounts lookup table.
+    number_of_columns: 11
+    columns:
+    - name: specialofferid
+      type: integer
+    - name: description
+      type: character varying
+    - name: discountpct
+      type: numeric
+    - name: type
+      type: character varying
+    - name: category
+      type: character varying
+    - name: startdate
+      type: timestamp without time zone
+    - name: enddate
+      type: timestamp without time zone
+    - name: minqty
+      type: integer
+    - name: maxqty
+      type: integer
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - specialofferid
+    list_of_foreign_keys: []
+    number_of_rows: 16
+  specialofferproduct:
+    comment: Cross-reference table mapping products to special offer discounts.
+    number_of_columns: 4
+    columns:
+    - name: specialofferid
+      type: integer
+    - name: productid
+      type: integer
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - specialofferid
+    - productid
+    list_of_foreign_keys:
+    - specialofferid
+    - productid
+    number_of_rows: 538
+  store:
+    comment: Customers (resellers) of Adventure Works products.
+    number_of_columns: 6
+    columns:
+    - name: businessentityid
+      type: integer
+    - name: name
+      type: character varying
+    - name: salespersonid
+      type: integer
+    - name: demographics
+      type: xml
+    - name: rowguid
+      type: uuid
+    - name: modifieddate
+      type: timestamp without time zone
+    list_of_primary_keys:
+    - businessentityid
+    list_of_foreign_keys:
+    - businessentityid
+    - salespersonid
+    number_of_rows: 701
